@@ -22,8 +22,7 @@ window.addEventListener("load", function () {
     });
   }
   var dt = new Date();
-  document.getElementById("date").innerHTML =
-    dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();
+  document.getElementById("date").innerHTML = dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();
   setInterval(() => {
     var hrs = dt.getHours();
     var min = dt.getMinutes();
@@ -104,14 +103,12 @@ var englishMessages = {
   App2USB: "Move installed games to an external USB drive",
   DisableUpdate: "Creates dummy files in the PS4 update folder",
   EnableUpdate: "Removes the dummy files in the PS4 update folder",
-  HistoryBlocker:
-    "Disable the auto opening of the last page used in the PS4 WebBrowser",
+  HistoryBlocker:"Disable the auto opening of the last page used in the PS4 WebBrowser",
   ToDex: "unlocks some debug features available on testkit",
   DumpG: "Dump Game only to a USB drive to be able to create fpkg files",
   DumpU: "Dump Update Game only to a USB drive to be able to create fpkg files",
   DumpGU: "Dump Game+Update to a USB drive to be able to create fpkg files",
-  DumpGUM:
-    "Dump Game+Update Merged to a USB drive to be able to create fpkg files",
+  DumpGUM:"Dump Game+Update Merged to a USB drive to be able to create fpkg files",
 };
 var russianMessages = {
   GoldHenV212: "GoldHen v2.1.2 By SiSTRO",
@@ -127,29 +124,58 @@ var russianMessages = {
   App2USB: "Перемещение установленных игр на внешний USB-накопитель",
   DisableUpdate: "Создает фиктивные файлы в папке обновлений PS4",
   EnableUpdate: "Удаляет фиктивные файлы в папке обновлений PS4",
-  HistoryBlocker:
-    "Отключение автоматического открытия последней используемой страницы в веб-браузере PS4",
+  HistoryBlocker:"Отключение автоматического открытия последней используемой страницы в веб-браузере PS4",
   ToDex: "Разблокирует некоторые функции отладки, доступные на testkit",
-  DumpG:
-    "Сбрасывать игру только на USB-накопитель, чтобы иметь возможность создавать файлы fpkg",
-  DumpU:
-    "Сбрасывать обновление игры только на USB-накопитель, чтобы иметь возможность создавать fpkg-файлы",
-  DumpGU:
-    "Сбросить игру+обновление на USB-накопитель, чтобы иметь возможность создавать fpkg-файлы",
-  DumpGUM:
-    "Слить игру+обновление слитно на USB-накопитель, чтобы иметь возможность создавать fpkg-файлы",
+  DumpG:"Сбрасывать игру только на USB-накопитель, чтобы иметь возможность создавать файлы fpkg",
+  DumpU:"Сбрасывать обновление игры только на USB-накопитель, чтобы иметь возможность создавать fpkg-файлы",
+  DumpGU:"Сбросить игру+обновление на USB-накопитель, чтобы иметь возможность создавать fpkg-файлы",
+  DumpGUM:"Слить игру+обновление слитно на USB-накопитель, чтобы иметь возможность создавать fpkg-файлы",
 };
+var arabicMessages = {
+    GoldHenV212: "ذهب دجاجة v2.1.2 من قبل SiSTRO",
+    GoldHenV224: "ذهب دجاجة v2.2.4 من قبل SiSTRO",
+    Hen_v213: "HEN 2.1.3 من قبل SiSTRO",
+    Hen_v213b: "HEN 2.1.3 من قبل SiSTRO و Leeful",
+    CheatCopy: "نسخ ملفات json و shn من USB إلى PS4",
+    BinLoader: "تحميل ملف bin الذي تم إرساله إلى عنوان IP PS4 على المنفذ 9021",
+    FTP: "خادم FTP بالوصول الكامل إلى PS4",
+    WebRTE: "مجموعة كبيرة من المدربين لألعاب PS4 الخاصة بك",
+    PS4debug: "ضبط البيانات الخاصة بالتحميل",
+    OrbisToolbox: "محمل أداة Orbis Alfa 1190",
+    App2USB: "نقل الألعاب المثبتة إلى جهاز USB خارجي",
+    DisableUpdate: "إنشاء ملفات زعفرانية في مجلد تحديث PS4",
+    EnableUpdate: "إزالة الملفات الزعفرانية في مجلد تحديث PS4",
+    HistoryBlocker: "تعطيل الفتح التلقائي لآخر صفحة تم استخدامها في متصفح PS4",
+    ToDex: "فتح بعض وظائف التصحيح المتاحة في testkit",
+    DumpG: "الإخراج فقط للعبة إلى جهاز USB لتكون قادرة على إنشاء ملفات fpkg",
+    DumpU: "تخزين تحديث اللعبة فقط على جهاز USB لتكون قادرة على إنشاء ملفات fpkg",
+    DumpGU: "تخزين لعبة + تحديث على جهاز USB لتكون قادرة على إنشاء ملفات fpkg",
+    DumpGUM: "تخزين لعبة + تحديث مدمج على جهاز USB لتكون قادرة على إنشاء ملفات fpkg"
+};
+
 document.getElementById("lang_en").addEventListener("click", function () {
-  document.querySelectorAll("[data-msgname]").forEach((e) => {
-    var arrind = e.getAttribute("data-msgname");
-    e.setAttribute("data-myinfo", englishMessages[arrind]);
+    document.querySelectorAll("[data-msgname]").forEach((e) => {
+      var arrind = e.getAttribute("data-msgname");
+      e.setAttribute("data-myinfo", englishMessages[arrind]);
+    });
+    document.getElementById("langbar").innerHTML = "English";
+    document.getElementById("thankslbl").innerHTML =
+      "Super Special Thanks to Karo Sharifi, Sleirsgoevy, SiSTRo";
+    document.getElementById("speciallbl").innerHTML =
+      "and ps4krar for being the first to fork my repo";
   });
-  document.getElementById("langbar").innerHTML = "English";
-  document.getElementById("thankslbl").innerHTML =
-    "Super Special Thanks to Karo Sharifi, Sleirsgoevy, SiSTRo";
-  document.getElementById("speciallbl").innerHTML =
-    "and ps4krar for being the first to fork my repo";
-});
+  
+document.getElementById("lang_ar").addEventListener("click", function () {
+    document.querySelectorAll("[data-msgname]").forEach((e) => {
+      var arrind = e.getAttribute("data-msgname");
+      e.setAttribute("data-myinfo", arabicMessages[arrind]);
+    });
+    document.getElementById("langbar").innerHTML = "Arabic";
+    document.getElementById("thankslbl").innerHTML =
+      "Super Special Thanks to Karo Sharifi, Sleirsgoevy, SiSTRo";
+    document.getElementById("speciallbl").innerHTML =
+      "and ps4krar for being the first to fork my repo";
+  });
 document.getElementById("lang_ru").addEventListener("click", function () {
   document.querySelectorAll("[data-msgname]").forEach((e) => {
     var arrind = e.getAttribute("data-msgname");

@@ -1,7 +1,5 @@
 document.getElementById("showsyscalls").textContent +=
-  "aio_init_addr=" +
-  aio_init_addr +
-  "\r\n" +
+  "aio_init_addr=" +aio_init_addr +"\r\n" +
   ("fpathconf_addr=" + fpathconf_addr + "\r\n") +
   ("dmem_container_addr=" + dmem_container_addr + "\r\n") +
   ("evf_clear_addr=" + evf_clear_addr + "\r\n") +
