@@ -13,18 +13,9 @@ window.addEventListener("load", function () {
     }, 1000);
   }
   if (window.confirm("Do you want to cache the site?")) {
-    window.applicationCache.addEventListener(
-      "progress",
-      function (e) {
-        DLProgress(e);
-      },
-      false
-    );
+    window.applicationCache.addEventListener("progress",function (e) {DLProgress(e);},false);
     window.applicationCache.addEventListener("cached", DisplayCacheProgress);
-    window.applicationCache.addEventListener(
-      "updateready",
-      DisplayCacheProgress
-    );
+    window.applicationCache.addEventListener("updateready",DisplayCacheProgress);
     window.applicationCache.addEventListener("error", function () {
       document.getElementById("cacheUPDtxt").innerHTML =
         "Error Installing Cache";
@@ -36,8 +27,7 @@ window.addEventListener("load", function () {
   setInterval(() => {
     var hrs = dt.getHours();
     var min = dt.getMinutes();
-    document.getElementById("clock").innerHTML =
-      (hrs < 10 ? "0" + hrs : hrs) + ":" + (min < 10 ? "0" + min : min);
+    document.getElementById("clock").innerHTML = (hrs < 10 ? "0" + hrs : hrs) + ":" + (min < 10 ? "0" + min : min);
   }, 0);
   if (localStorage.passcount == null) {
     localStorage.passcount = 0;
@@ -56,14 +46,23 @@ document.querySelectorAll("[data-myinfo]").forEach((e) => {
     document.getElementById("msgs2").innerHTML = "status";
   });
 });
+function addScript(path) {
+  const head = document.head;
+  const existingScript = document.getElementById("expload");
+  if (existingScript) head.removeChild(existingScript);
+
+  const script = document.createElement("script");
+  script.src = path;
+  script.id = "expload";
+  head.appendChild(script);
+}
+
 function load_hen(x) {
   PLfile = "BinFiles/" + x;
   msgs2.innerHTML = "Jailbreaking please wait";
   LoadedMSG = "Payload Loaded";
   setTimeout(function () {
-    var script = document.createElement("script");
-    script.src = "common/exp_loader.js";
-    document.getElementsByTagName("head")[0].appendChild(script);
+    addScript("common/exp_loader.js");
   }, 3000);
   setTimeout(jailbreak, 500);
 }
@@ -71,10 +70,9 @@ function load_Pl(x) {
   PLfile = "BinFiles/" + x;
   msgs2.innerHTML = "Payload loading... please wait";
   LoadedMSG = "Payload Loaded";
-  var script = document.createElement("script");
-  script.src = "common/pls_loader.js";
-  document.getElementsByTagName("head")[0].appendChild(script);
+  addScript("common/exp_loader.js");
 }
+
 var current = false;
 var elm = document.getElementById("logarea"),
   closebtn = document.getElementById("closelogs"),
