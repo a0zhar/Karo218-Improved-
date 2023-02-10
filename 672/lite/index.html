@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en-US" manifest="offline.cache">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PS4 Exploit Host, for FW 6.72 (lite version) by A0zhar</title>
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../bootstrap/bootstrap.css">
+  <link rel="stylesheet" href="../../ourstyle.css">
+  <!-- Scripts -->
+  <script src="../common/exploit.js"></script>
+  <script src="../common/jb.js"></script>
+  
+</head>
+
+<body>
+  <div id="mainarea">
+    <div id="ScrOverlay" class="cacheUPDbg">
+      <a id="cacheUPDtxt" class="cacheUPD"></a>
+      <div class="progress" id="CacheProgress">
+        <div class="progress-bar" role="progressBar" id="CacheBar"></div>
+      </div>
+    </div>
+    <!-- top navbar, showing pass/fail counter, date/clock, and title -->
+    <nav class="navbar navbar-expand-md bg-dark border-bottom">
+      <div class="container-fluid">
+        <div id="date" class="nav-link my-0 p-0 ml-3">20/11/2022</div>
+        <div class="container navbar-nav">
+          <div class="navbar-nav mx-auto">
+            <div class="nav-link vAlignmiddle">
+              <span class="badge bg-success mx-3 vAlignmiddle" id="passCounter">0</span>
+              <span class="mx-3 text-white text-center fw-bold p-0 vAlignmiddle" style="font-size: 25px;">
+                <span style="font-size:25px">KARO218 PS4 FW 6.72 HOST</span>
+              </span>
+              <span class="badge bg-danger mx-3 vAlignmiddle" id="failCounter">0</span>
+            </div>
+          </div>
+        </div>
+        <div id="clock" class="nav-link my-0 mr-3 vAlignmiddle">00:00</div>
+      </div>
+    </nav>
+    <!-- the second navbar, showing info about payloads-->
+    <div class="container-fluid p-0">
+      <nav class="navbar container navbar-expand-md p-1 rounded-bottom bg-dark w-50 mx-auto">
+        <div class="navbar-nav mx-auto">
+          <span id="msgs2">status</span>
+        </div>
+      </nav>
+    </div>
+    <a id="showbtn" style="transform: translate(10px,-25px);font-size: 18px;"><span class="vAlignmiddle">Rewriting Both Translate/View Logs feature</span></a>
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+      <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-info text-white">
+          <strong class="me-auto">Message from A0zhar</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body bg-black text-white" id="welcomemsg">
+          Hello and welcome to my personalized version of Karo218's PS4 host for firmware 6.72!
+          <br><br>
+          If you come across any bugs, errors or problems, feel free to reach out to me on my
+          Discord at a0zhar#9539. Reporting these will help alot!
+          <br><br>
+          Have a great day!
+        </div>
+      </div>
+    </div>
+
+    <div class="container mx-auto p-3 mt-5 text-center" id="MyItems">
+      <button class="btn btn-lg btn-outline-warning mx-1 my-2" 
+        pl-info="GoldHen v2.3 (Homebrew Enabler) by SiSTRo" pl-file="goldhen_2.3.bin" pl-loadedmsg="goldhen v2.3 loaded!" 
+        onclick="loadBinFile(this);">
+        GoldHenV2.3
+      </button>
+      <button class="btn btn-lg btn-outline-warning mx-1 my-2" 
+        pl-info="GoldHen v2.2.4 (Homebrew Enabler) by SiSTRo" pl-file="goldhen_2.2.4.bin" pl-loadedmsg="goldhen v2.2.4 loaded!" 
+        onclick="loadBinFile(this);">
+        GoldHenV2.2.4
+      </button>
+      <button class="btn btn-lg btn-dark mx-1 my-2" 
+        pl-info="Hen v2.1.3 (Homebrew Enabler) by SiSTRo" pl-file="hen_2.1.3.bin" pl-loadedmsg="Hen v2.1.3 loaded!" 
+        onclick="loadBinFile(this);">
+        Hen v2.1.3
+      </button>
+      <button class="btn btn-lg btn-dark mx-1 my-2" 
+        pl-info="Hen v2.1.3b (Homebrew Enabler) by SiSTRo/Leeful" pl-file="hen_2.1.3b.bin" pl-loadedmsg="Hen v2.1.3b loaded!" 
+        onclick="loadBinFile(this);">
+        Hen v2.1.3b
+      </button><br>
+      <button class="btn btn-success mx-1 my-2" 
+        pl-info="PS4 Debugger" pl-file="ps4debug.bin" pl-loadedmsg="PS4Debug loaded!" 
+        onclick="loadBinFile(this);">
+        PS4Debug
+      </button>
+      <button class="btn btn-info mx-1 my-2" 
+        pl-info="Needs to be loaded before using a trainer for running game" pl-file="webrte.bin" pl-loadedmsg="WebRTE loaded!" 
+        onclick="loadBinFile(this);">
+        WebRTE
+      </button>
+      <button class="btn btn-dark mx-1 my-2" 
+        pl-info="Disables System Updates from being Downloaded" pl-file="blocksysupdates.bin" pl-loadedmsg="SysUpdate Disabler Loaded!" 
+        onclick="loadBinFile(this);">
+        Disable Updates
+      </button>
+      <button class="btn btn-dark mx-1 my-2" 
+        pl-info="Re-enables System Updates being Downloaded" pl-file="allowsysupdates.bin" pl-loadedmsg="SysUpdate Enabler Loaded!" 
+        onclick="loadBinFile(this);">
+        Enable Updates
+      </button>
+      <br>
+      <button class="btn btn-dark mx-1 my-2" 
+        pl-info="Move installed games to an external USB drive" pl-file="app2usb.bin" pl-loadedmsg="App2USB Loaded!" 
+        onclick="loadBinFile(this);">
+        App2USB
+      </button>
+      <button class="btn btn-danger mx-1 my-2" 
+        pl-info="Loads Orbis Tool Box" pl-file="orbistoolbox.bin" pl-loadedmsg="OrbisToolBox Loaded!" 
+        onclick="loadBinFile(this);">
+        OrbisToolBox
+      </button>
+      <button class="btn btn-dark mx-1 my-2" 
+        pl-info="Disable the auto opening of the last page used in the PS4 WebBrowser" pl-file="disablehistory.bin" pl-loadedmsg="WebHistory blocker Loaded!" 
+        onclick="loadBinFile(this);">
+        Block Web-History
+      </button>
+      <button class="btn btn-dark mx-1 my-2" 
+        pl-info="Start FTP server with full (R/W access)" pl-file="ftpServer.bin" pl-loadedmsg="FTP Loaded!" 
+        onclick="loadBinFile(this);">
+        FTP (full R/W)
+      </button>
+      <br>
+      <button class="btn btn-dark mx-1 my-2" 
+        pl-info="Dumps Currently Running Game (base only) onto USB" pl-file="DumperG.bin" pl-loadedmsg="Game Dumper Loaded!" 
+        onclick="loadBinFile(this);">
+        Dumper G
+      </button>
+      <button class="btn btn-dark mx-1 my-2" 
+        pl-info="Dumps Running Game (patch only) onto USB" pl-file="DumperU.bin" pl-loadedmsg="Game Patch Dumper Loaded!" 
+        onclick="loadBinFile(this);">
+        Dumper U
+      </button>
+      <button class="btn btn-dark mx-1 my-2" 
+        pl-info="Dumps Currently Running Game (base+current patch) seperately onto USB" pl-file="DumperGU.bin" pl-loadedmsg="Game Dumper Loaded!" 
+        onclick="loadBinFile(this);">
+        Dumper G+U S
+      </button>
+      <button class="btn btn-dark mx-1 my-2" 
+        pl-info="Dumps Currently Running Game (base+current patch) merged onto USB" pl-file="DumperM.bin" pl-loadedmsg="Game Dumper Loaded!" 
+        onclick="loadBinFile(this);">
+        Dumper G+U M
+      </button>
+      <br>
+    </div>
+    <br /><br />
+    <div class="card mx-auto bg-dark w-50 p-0 position-absolute" style="bottom: 20px;left:50%;transform: translateX(-50%);">
+        <div class="card-header py-3 text-center">
+          <span class="px-0 py-3">
+            <span class="fw-bold" style="color: var(--red)">Designed, Coded, and Hosted by </span>
+            <span class="hue">A0zhar</span>
+          </span>
+        </div>
+        <div class="card-body ">
+        <p class="text-center" id="thankslbl">
+          <span>Karo Sharifi: For the OG Host UI Design</span><br>
+          <span>Sleirsgoevy: For the full chain exploit for PS4 fw 6.72</span><br>
+          <span>SiSTRo: For GoldHEN and Hen (homebrew enablers)</span><br>
+          <span>PS4krar: for being the first to fork a repo of mine :) </span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../bootstrap/bootstrap.js"></script>
+  <script src="../functions.js"></script>
+</body>
+
+</html>

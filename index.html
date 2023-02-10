@@ -1,54 +1,55 @@
 <!DOCTYPE html>
-<html lang=en-US>
+<html lang="en-US">
 
 <head>
-  <meta charset=utf-8 />
-  <meta name=viewport content="width=device-width, initial-scale=1" />
-  <title>Karo Host (mod by a0zhar)</title>
-  <link rel=stylesheet href="bootstrap/bootstrap.css" />
-  <link rel=stylesheet href="ourstyle.css" s />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A0ZHAR PS4-EXPLOIT HOST (firmware selection)</title>
+  <link rel="stylesheet" href="bootstrap/bootstrap.css" />
+  <link rel="stylesheet" href="ourstyle.css" />
   <script>
     window.addEventListener("load", function() {
-      var dt = new Date();
-      document.getElementById("date").innerHTML = dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();
+      const date = new Date();
+      const day = date.getDate();
+      const month = date.getMonth() + 1;
+      const year = date.getFullYear();
+      document.getElementById("date").innerHTML = `${day}/${month}/${year}`;
       setInterval(() => {
-        var hrs = dt.getHours();
-        var min = dt.getMinutes();
-        document.getElementById("clock").innerHTML = (hrs < 10 ? "0" + hrs : hrs) + ":" + (min < 10 ? "0" + min : min);
-      }, 0);
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+        document.getElementById("clock").innerHTML =
+          `${hours < 10 ? "0" + hours : hours}:${minutes < 10 ? "0" + minutes : minutes}`;
+      }, 1000);
     });
   </script>
 </head>
 
 <body>
-  <div style="display: block" class="m-0" id="mainarea">
+  <div id="mainarea">
 
+    <!-- top navbar, showing pass/fail counter, date/clock, and title -->
     <nav class="navbar navbar-expand-md bg-dark border-bottom">
       <div class="container-fluid">
-        <div id="date" class="nav-link my-0 p-0 ml-3" style="vertical-align: middle">
-          20/11/2022
-        </div>
-        <div class="container navbar-nav mx-auto">
+        <div id="date" class="nav-link my-0 p-0 ml-3">20/11/2022</div>
+        <div class="container navbar-nav">
           <div class="navbar-nav mx-auto">
-            <div class="nav-link" style="vertical-align: middle">
-              <span class="mx-3 text-white text-center fw-bold p-0" style="font-size: 25px; vertical-align: middle">A0ZHAR PS4 HOST<span style="color: var(--yellow)"> FW SELECT</span>
-                <span style="color: var(--green)"></span></span>
+            <div class="nav-link vAlignmiddle">
+              <span class="mx-3 text-white text-center fw-bold p-0 vAlignmiddle">
+                <span style="font-size:25px">A0ZHAR PS4-EXPLOIT HOST</span>
+              </span>
             </div>
           </div>
         </div>
-        <div id="clock" class="nav-link my-0 mr-3" style="vertical-align: middle">
-          16:31
-        </div>
+        <div id="clock" class="nav-link my-0 mr-3 vAlignmiddle">00:00</div>
       </div>
     </nav>
-    <div class=container-fluid>
-      <div class="container mx-auto">
-        <nav class="navbar navbar-expand-md p-1 rounded-bottom bg-dark w-50 mx-auto">
-          <div class="navbar-nav mx-auto">
-            <span id=msgs2>Select your current firmware</span>
-          </div>
-        </nav>
-      </div>
+    <!-- the second navbar, showing info about payloads-->
+    <div class="container-fluid p-0">
+      <nav class="navbar container navbar-expand-md p-1 rounded-bottom bg-dark w-50 mx-auto">
+        <div class="navbar-nav mx-auto">
+          <span id="msgs2">Please select your current ps4 firmware</span>
+        </div>
+      </nav>
     </div>
     <div class="toast-container position-fixed top-0 end-0 p-3">
       <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
@@ -62,38 +63,26 @@
         </div>
       </div>
     </div>
-    <div class="container mx-auto p-3 mt-5 text-center" id=MyItems>
-      <a class="btn mx-1 my-2 btn-dark btn-outline-danger" href="672L/index.html">Firmware 6.72 Lite Edition</a>
+    <div class="container mx-auto p-3 mt-5 text-center" id="MyItems">
+      <a class="btn btn-lg mx-1 my-2 btn-dark btn-outline-danger" href="672/lite/index.html">Firmware 6.72 Lite Edition</a>
     </div>
     <br /><br />
-    <div class="card mx-auto bg-dark w-50 p-2">
+    <div class="card mx-auto bg-dark w-50 p-0 position-absolute" style="bottom: 20px;left:50%;transform: translateX(-50%);">
       <div class="card-header py-3 text-center">
         <span class="px-0 py-3">
-          <span class="fw-bold" style="color: var(--red)">Original Dev:</span>
-          <span class="hue"><span>Karo Sharifi</span></span>
-        </span>
-        <span class="px-0 py-3">
-          <span class="fw-bold" style="color: var(--red)">Custom/Improved by:</span>
+          <span class="fw-bold" style="color: var(--red)">Designed, Coded, and Hosted by </span>
           <span class="hue">A0zhar</span>
         </span>
       </div>
-      <div class="card-body">
-        <p class="text-center">
-          Super Special Thanks to Karo Sharifi, Sleirsgoevy, SiSTRo
+      <div class="card-body ">
+        <p class="text-center" id="thankslbl">
+          <span>Karo Sharifi: For the OG Host UI Design</span><br>
+          <span>PS4krar: for being the first to fork a repo of mine :) </span>
         </p>
-        <footer class="text-center">
-          and ps4krar for being the first to fork my repo
-        </footer>
       </div>
     </div>
   </div>
-  </div>
   <script src="bootstrap/bootstrap.js"></script>
-  <script>
-    const toastLiveExample = document.getElementById('liveToast');
-    const toast = new bootstrap.Toast(toastLiveExample);
-    toast.show();
-  </script>
 </body>
 
 </html>
