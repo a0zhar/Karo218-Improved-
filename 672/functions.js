@@ -1,39 +1,38 @@
 window.addEventListener("load", () => {
   const cacheUPDtxt = document.getElementById("cacheUPDtxt");
   const CacheBar = document.getElementById("CacheBar");
+  const cacheoverlay = document.getElementById("ScrOverlay");
   const passCounter = document.getElementById("passCounter");
   const failCounter = document.getElementById("failCounter");
 
-  // Check if the page has already been cached
-  if (!localStorage.iscached || typeof localStorage.iscached === "undefined") {
-    // Prompt the user to cache the page for offline usage
-    if (window.confirm("Do you want to cache this page, for offline use?")) {
-      // Show the caching progress
-      window.applicationCache.addEventListener("progress", (e) => {
-        cacheUPDtxt.innerHTML = `Installing Offline Cache: ${Math.round(
-          (e.loaded / e.total) * 100
-        )}%`;
-        CacheBar.style.width = `${Math.round((e.loaded / e.total) * 100)}%`;
-      });
+  // Prompt the user to cache the page for offline usage
+  if (window.confirm("Do you want to cache this page, for offline use?")) {
+    // Show the caching progress
+    window.applicationCache.addEventListener("progress", (e) => {
+      cacheoverlay.style.display = "block";
+      cacheUPDtxt.innerHTML = `Installing Offline Cache: ${Math.round((e.loaded / e.total) * 100)}%`;
+      CacheBar.style.width = `${Math.round((e.loaded / e.total) * 100)}%`;
+    });
 
-      window.applicationCache.addEventListener("cached", () => {
-        // Show the cache is successfully installed and reload the page
-        cacheUPDtxt.innerHTML = "Page Cached successfully, reloading....";
-        window.location.reload();
-      });
+    window.applicationCache.addEventListener("cached", () => {
+      cacheoverlay.style.display = "none";
+      // Show the cache is successfully installed and reload the page
+      cacheUPDtxt.innerHTML = "Page Cached successfully, reloading....";
+    });
 
-      window.applicationCache.addEventListener("updateready", () => {
-        // Show the cache is successfully installed and reload the page
-        cacheUPDtxt.innerHTML = "Page Cached successfully, reloading....";
-        window.location.reload();
-      });
-      // Show an error message if there was an error installing the cache
-      window.applicationCache.addEventListener("error", () => {
-        cacheUPDtxt.innerHTML = "Error Installing Cache";
-      });
-      // Set this to true, so that it won't be prompted again unless the website data is cleared on PS4 console
-      localStorage.iscached = true;
-    }
+    window.applicationCache.addEventListener("updateready", () => {
+      cacheoverlay.style.display = "none";
+
+      // Show the cache is successfully installed and reload the page
+      cacheUPDtxt.innerHTML = "Page Cached successfully, reloading....";
+    });
+    // Show an error message if there was an error installing the cache
+    window.applicationCache.addEventListener("error", () => {
+      cacheoverlay.style.display = "none";
+
+      cacheUPDtxt.innerHTML = "Error Installing Cache";
+    });
+    // Set this to true, so that it won't be prompted again unless the website data is cleared on PS4 console
   }
 
   // Initialize the passcount and failcount in localStorage
