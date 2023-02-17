@@ -1,24 +1,4 @@
-window.addEventListener("load", function () {
-  // Show the caching progress
-  window.applicationCache.addEventListener("progress", (e) => {
-    let progress = Math.round((e.loaded / e.total) * 100);
-    ScrOverlay.style.display = "block";
-    cacheUPDtxt.innerHTML = `Installing Offline Cache: ${progress}%`;
-    CacheBar.style.width = `${progress}%`;
-  });
-  window.applicationCache.addEventListener("cached", () => {
-    cacheUPDtxt.innerHTML = "Page is Cached";
-  });
-  window.applicationCache.addEventListener("updateready", () => {
-    cacheUPDtxt.innerHTML = "Page is Cached";
-  });
-  window.applicationCache.addEventListener("error", () => {
-    cacheUPDtxt.innerHTML = "Error Installing Cache";
-  });
-  // Initialize the passcount and failcount in localStorage
-  localStorage.passcount = localStorage.passcount || 0;
-  localStorage.failcount = localStorage.failcount || 0;
-});
+
 
 function setupDateElements() {
   const date = new Date();
