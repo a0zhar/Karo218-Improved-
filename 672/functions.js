@@ -45,7 +45,15 @@ window.addEventListener("load", () => {
 
   setupEventListeners();
   setupDateElements();
+  
+// Call the cleanup function when the browser is exiting
+window.addEventListener('beforeunload', function (event) {
+  spray = null; // Set the array to null to release its memory
+  alert(spray.length);
 });
+});
+
+
 function setupDateElements() {
   const date = new Date();
   const day = date.getDate();
