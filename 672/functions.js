@@ -36,16 +36,17 @@ function setupEventListeners() {
       msgs2.textContent = "waiting for payload selection";
     });
   });
-} 
+}
 
 setupEventListeners();
 setupDateElements();
 
 // Show the caching progress
-window.applicationCache.addEventListener("progress", (e) => {
+window.applicationCache.addEventListener("progress", ({ loaded, total }) => {
+  let progress = Math.round((loaded / total) * 100);
   ScrOverlay.style.display = "block";
-  cacheUPDtxt.textContent = `Installing Offline Cache: ${Math.round((e.loaded / e.total) * 100)}%`;
-  CacheBar.style.width = `${Math.round((e.loaded / e.total) * 100)}%`;
+  cacheUPDtxt.textContent = `Installing Offline Cache: ${progress}%`;
+  CacheBar.style.width = `${progress}%`;
 });
 window.applicationCache.addEventListener("cached", () => {
   cacheUPDtxt.textContent = "Page is Cached";
@@ -56,7 +57,6 @@ window.applicationCache.addEventListener("updateready", () => {
 window.applicationCache.addEventListener("error", () => {
   cacheUPDtxt.innerHTML = "Error Installing Cache";
 });
-
 
 function addScript(src) {
   const head = document.getElementsByTagName("head")[0];
@@ -84,4 +84,3 @@ function loadBinFile(element) {
     addScript("../common/loader.js");
   }, 2000);
 }
-
