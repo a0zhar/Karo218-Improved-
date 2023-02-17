@@ -172,7 +172,74 @@
   </div>
 
   <script src="../../bootstrap/bootstrap.js"></script>
-  <script src="../functions.js"></script>
+  <script style="display:block; color:white;padding:20px;" contenteditable>
+  
+
+function setupDateElements() {
+  const date = new Date();
+  let day = date.getDate();
+  let month = date.getMonth() + 1;
+  let year = date.getFullYear();
+
+  document.getElementById("date").innerHTML = `${day}/${month}/${year}`;
+
+  setTimeout(function () {
+    let hours = date.getHours().toString().padStart(2, "0");
+    let minutes = date.getMinutes().toString().padStart(2, "0");
+    document.getElementById("clock").innerHTML = `${hours}:${minutes}`;
+  }, 1000);
+}
+
+function setupEventListeners() {
+  document
+    .getElementById("MyItems")
+    .querySelectorAll("[pl-info]")
+    .forEach((plElm) => {
+      // When cursor is on one of the payload buttons, show its info.
+      plElm.addEventListener("mouseover", () => {
+        msgs2.innerHTML = plElm.getAttribute("pl-info");
+      });
+      // When cursor isn't on the button anymore, reset msgs2 text.
+      plElm.addEventListener("mouseout", () => {
+        msgs2.innerHTML = "waiting for payload selection";
+      });
+    });
+}
+
+setupEventListeners();
+setupDateElements();
+function sendAndRunPayload(src) {
+  var xhr = new XMLHttpRequest();
+  xhr.responseType = "arraybuffer";
+  xhr.open("GET", src, true);
+  xhr.send();
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4) {
+      var tmp0 = new Uint8Array(xhr.response.byteLength);
+      tmp0.set(new Uint8Array(xhr.response), 0);
+      var payload = new Uint32Array(tmp0);
+      var getlength = "0x" + xhr.response.byteLength.toString(16);
+      window.pl_blob_len = getlength;
+      window.pl_blob = malloc(window.pl_blob_len);
+      write_mem(window.pl_blob, payload);
+      load_payload();
+    }
+  };
+}
+
+function loadBinFile(element) {
+  LoadedMSG = element.getAttribute("pl-loadedmsg");
+
+  if (PLfile.includes("hen")) {
+    document.getElementById("msgs2").innerHTML = "Jailbreaking, please wait";
+    setTimeout(jailbreak, 500);
+  }
+
+  setTimeout(function () {
+    sendAndRunPayload(`bin/${element.getAttribute("pl-file")}`);
+  }, 3000);
+}
+</script>
 </body>
 
 </html>
