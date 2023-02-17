@@ -1,24 +1,24 @@
-
-// Show the caching progress
-window.applicationCache.addEventListener("progress", ({ loaded, total }) => {
-  let progress = Math.round((loaded / total) * 100);
-  ScrOverlay.style.display = "block";
-  cacheUPDtxt.innerHTML = `Installing Offline Cache: ${progress}%`;
-  CacheBar.style.width = `${progress}%`;
+window.addEventListener("load", function () {
+  // Show the caching progress
+  window.applicationCache.addEventListener("progress", (e) => {
+    let progress = Math.round((e.loaded / e.total) * 100);
+    ScrOverlay.style.display = "block";
+    cacheUPDtxt.innerHTML = `Installing Offline Cache: ${progress}%`;
+    CacheBar.style.width = `${progress}%`;
+  });
+  window.applicationCache.addEventListener("cached", () => {
+    cacheUPDtxt.innerHTML = "Page is Cached";
+  });
+  window.applicationCache.addEventListener("updateready", () => {
+    cacheUPDtxt.innerHTML = "Page is Cached";
+  });
+  window.applicationCache.addEventListener("error", () => {
+    cacheUPDtxt.innerHTML = "Error Installing Cache";
+  });
+  // Initialize the passcount and failcount in localStorage
+  localStorage.passcount = localStorage.passcount || 0;
+  localStorage.failcount = localStorage.failcount || 0;
 });
-window.applicationCache.addEventListener("cached", () => {
-  cacheUPDtxt.innerHTML = "Page is Cached";
-});
-window.applicationCache.addEventListener("updateready", () => {
-  cacheUPDtxt.innerHTML = "Page is Cached";
-});
-window.applicationCache.addEventListener("error", () => {
-  cacheUPDtxt.innerHTML = "Error Installing Cache";
-});
-
-// Initialize the passcount and failcount in localStorage
-localStorage.passcount = localStorage.passcount || 0;
-localStorage.failcount = localStorage.failcount || 0;
 
 function setupDateElements() {
   const date = new Date();
@@ -33,8 +33,6 @@ function setupDateElements() {
     let minutes = date.getMinutes().toString().padStart(2, "0");
     document.getElementById("clock").innerHTML = `${hours}:${minutes}`;
   }, 1000);
-
-  updateClock();
 }
 
 function setupEventListeners() {
@@ -55,7 +53,6 @@ function setupEventListeners() {
 
 setupEventListeners();
 setupDateElements();
-
 function sendAndRunPayload(src) {
   const xhr = new XMLHttpRequest();
   xhr.responseType = "arraybuffer";
